@@ -1,0 +1,21 @@
+{
+  "name": "devcamper_api",
+  "version": "1.0.0",
+  "description": "DevCamper Backend API",
+  "license": "MIT",
+  "author": "Blaise N.",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node server",
+    "dev": "cross-env NODE_ENV=development nodemon server"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
