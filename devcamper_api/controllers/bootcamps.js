@@ -33,7 +33,8 @@ exports.getSingleBootcamp = async (req, res, next) => {
       data: bootcamp,
     });
   } catch (error) {
-    res.status(400).json({ success: false });
+    // res.status(400).json({ success: false });
+    next(error);
   }
 };
 
