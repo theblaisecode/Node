@@ -13,8 +13,9 @@ exports.getBootcamps = async (req, res, next) => {
       count: bootcamp.length,
       data: bootcamp,
     });
-  } catch (error) {
-    res.status(400).json({ success: false });
+  } catch (err) {
+    next(err);
+    // res.status(400).json({ success: false });
   }
 };
 
@@ -27,7 +28,7 @@ exports.getSingleBootcamp = async (req, res, next) => {
 
     if (!bootcamp) {
       return next(
-        new ErrorResponse(`Bootcamp not found with the id of ${req.params.id}`)
+        new ErrorResponse(`Bootcamp not found with the id of ${req.params.id}`, 404)
       );
     }
 
@@ -35,11 +36,9 @@ exports.getSingleBootcamp = async (req, res, next) => {
       success: true,
       data: bootcamp,
     });
-  } catch (error) {
+  } catch (err) {
     // res.status(400).json({ success: false });
-    next(
-      new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 400)
-    );
+    next(err);
   }
 };
 
@@ -54,8 +53,9 @@ exports.createBootcamp = async (req, res, next) => {
       success: true,
       data: bootcamp,
     });
-  } catch (error) {
-    res.status(400).json({ success: false });
+  } catch (err) {
+    next(err);
+    // res.status(400).json({ success: false });
   }
 };
 
@@ -70,15 +70,18 @@ exports.updateBootcamp = async (req, res, next) => {
     });
 
     if (!bootcamp) {
-      return res.status(400).json({ success: false });
+      return next(
+        new ErrorResponse(`Bootcamp not found with the id of ${req.params.id}`, 404)
+      );
     }
 
     res.status(200).json({
       success: true,
       data: bootcamp,
     });
-  } catch (error) {
-    res.status(400).json({ success: false });
+  } catch (err) {
+    next(err);
+    // res.status(400).json({ success: false });
   }
 };
 
@@ -90,14 +93,17 @@ exports.deleteBootcamp = async (req, res, next) => {
     const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
 
     if (!bootcamp) {
-      return res.status(400).json({ success: false });
+      return next(
+        new ErrorResponse(`Bootcamp not found with the id of ${req.params.id}`, 404)
+      );
     }
 
     res.status(200).json({
       success: true,
       data: {},
     });
-  } catch (error) {
-    res.status(400).json({ success: false });
+  } catch (err) {
+    next(err);
+    // res.status(400).json({ success: false });
   }
 };
